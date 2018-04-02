@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Tell the browser it's a PWA -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- Tell iOS it's a PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js" async></script>
+    <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="js/royal_preloader.min.js"></script>
+    <script type="text/javascript">
+      Royal_Preloader.config({
+          mode:           'number',
+          showProgress:   false,
+          background:     '#fff'
+      });
+    </script>
+    <!--<link rel="stylesheet" href="./css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="css/ionicons.min.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="css/pe-icon-7-stroke.css">-->
+    <!--<link rel="stylesheet" href="./css/magnific-popup.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="./css/style.css">-->
+    <!--<link rel="stylesheet" href="./css/royal_preloader.css">-->
+
+
+    <script>
+        function initMap() {
+            let mapOptions = {
+                zoom: 15,
+                zoomControl: false,
+                scaleControl: false,
+                scrollwheel: false,
+                disableDoubleClickZoom: true,
+                center: new window.google.maps.LatLng(50.391968, 30.479871),
+                styles: [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]}]
+            };
+            let mapElement = document.getElementById('map');
+            let map = new window.google.maps.Map(mapElement, mapOptions);
+            let marker = new window.google.maps.Marker({
+                position: new window.google.maps.LatLng(50.391968, 30.479871),
+                map: map,
+                title: 'Our Office!'
+            });
+        }
+    </script>
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Springs PWA Demo</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root">
+      <!--<div id="royal_preloader"></div>-->
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('worker.js').then(function(registration) {
+                    console.log('Worker registration successful', registration.scope);
+                }, function(err) {
+                    console.log('Worker registration failed', err);
+                }).catch(function(err) {
+                    console.log(err);
+                });
+            });
+        } else {
+            console.log('Service Worker is not supported by browser.');
+        }
+    </script>
+
+  </body>
+</html>
